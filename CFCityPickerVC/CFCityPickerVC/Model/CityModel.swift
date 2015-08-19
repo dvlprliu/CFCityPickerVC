@@ -67,6 +67,13 @@ extension CFCityPickerVC {
                 }
                 
             }
+          
+          if destinationModels?.count == 0 {
+            if let cityName = cityNames?.first {
+              let lmCityModel = CityModel(id: -1, pid: -1, name: cityName, spell: "")
+              destinationModels?.append(lmCityModel)
+            }
+          }
             
             return destinationModels
         }

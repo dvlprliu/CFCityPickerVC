@@ -101,8 +101,11 @@ extension CFCityPickerVC: UITableViewDataSource,UITableViewDelegate{
                 
                 if error != nil {return}
                 if placemark == nil {return}
-                let city: NSString = (placemark!.locality! as NSString)
-                self.currentCity = city as String
+//                let city: NSString = reverseGecodeInfo["administrativeArea"] as! String
+              if let city = reverseGecodeInfo!["administrativeArea"] as? String {
+               self.currentCity = city as String
+              }
+              
                 
             })
             
