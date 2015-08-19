@@ -13,7 +13,9 @@ extension CFCityPickerVC: UITableViewDataSource,UITableViewDelegate{
     
     var searchH: CGFloat{return 60}
     
-    private var currentCityModel: CityModel? {if self.currentCity==nil{return nil};return CityModel.findCityModelWithCityName([self.currentCity], cityModels: self.cityModels, isFuzzy: false)?.first}
+    private var currentCityModel: CityModel? {
+      if self.currentCity==nil{return nil};
+      return CityModel.findCityModelWithCityName([self.currentCity], cityModels: self.cityModels, isFuzzy: false)?.first}
     private var hotCityModels: [CityModel]? {if self.hotCities==nil{return nil};return CityModel.findCityModelWithCityName(self.hotCities, cityModels: self.cityModels, isFuzzy: false)}
     private var historyModels: [CityModel]? {if self.selectedCityArray.count == 0 {return nil};return CityModel.findCityModelWithCityName(self.selectedCityArray, cityModels: self.cityModels, isFuzzy: false)}
     
@@ -25,7 +27,7 @@ extension CFCityPickerVC: UITableViewDataSource,UITableViewDelegate{
         var h1: CGFloat = 100
         var h2: CGFloat = 100; if self.historyModels?.count > 4{h2+=40}
         var h3: CGFloat = 100; if self.hotCities?.count > 4 {h3+=40}
-        return h0+h1+h2+h3
+        return h0+h1
     }
     
     private var sortedCityModles: [CityModel] {
@@ -96,7 +98,7 @@ extension CFCityPickerVC: UITableViewDataSource,UITableViewDelegate{
                 
                 if error != nil {return}
                 if placemark == nil {return}
-                let city: NSString = (placemark!.locality! as NSString).stringByReplacingOccurrencesOfString("市", withString: "")
+                let city: NSString = (placemark!.locality! as NSString)
                 self.currentCity = city as String
                 
             })
@@ -211,26 +213,26 @@ extension CFCityPickerVC: UITableViewDataSource,UITableViewDelegate{
         
         
         
-        let itemView2 = HeaderItemView.getHeaderItemView("历史选择")
-        var historyCityModels: [CityModel] = []
-        if self.historyModels != nil {historyCityModels += self.historyModels!}
-        itemView2.cityModles = historyCityModels
-        var frame2 = headItemViewH(itemView2.cityModles.count)
-        frame2.origin.y = CGRectGetMaxY(frame1)
-        itemView2.frame = frame2
-        headerView.addSubview(itemView2)
-        
-        
-        
-        let itemView3 = HeaderItemView.getHeaderItemView("热门城市")
-        var hotCityModels: [CityModel] = []
-        if self.hotCityModels != nil {hotCityModels += self.hotCityModels!}
-        itemView3.cityModles = hotCityModels
-        var frame3 = headItemViewH(itemView3.cityModles.count)
-        frame3.origin.y = CGRectGetMaxY(frame2)
-        itemView3.frame = frame3
-        headerView.addSubview(itemView3)
-        
+//        let itemView2 = HeaderItemView.getHeaderItemView("历史选择")
+//        var historyCityModels: [CityModel] = []
+//        if self.historyModels != nil {historyCityModels += self.historyModels!}
+//        itemView2.cityModles = historyCityModels
+//        var frame2 = headItemViewH(itemView2.cityModles.count)
+//        frame2.origin.y = CGRectGetMaxY(frame1)
+//        itemView2.frame = frame2
+//        headerView.addSubview(itemView2)
+//        
+//        
+//        
+//        let itemView3 = HeaderItemView.getHeaderItemView("热门城市")
+//        var hotCityModels: [CityModel] = []
+//        if self.hotCityModels != nil {hotCityModels += self.hotCityModels!}
+//        itemView3.cityModles = hotCityModels
+//        var frame3 = headItemViewH(itemView3.cityModles.count)
+//        frame3.origin.y = CGRectGetMaxY(frame2)
+//        itemView3.frame = frame3
+//        headerView.addSubview(itemView3)
+      
         
         self.tableView?.tableHeaderView = headerView
     }

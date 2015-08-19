@@ -21,7 +21,7 @@ class ViewController: UIViewController {
         //目前有如下问题
         
         //3.还没做定位
-        
+      
         
         
         
@@ -29,12 +29,12 @@ class ViewController: UIViewController {
         
 //        //设置当前城市
 //        cityVC.currentCity = "成都"
-        
+      
 
         
         //设置热门城市
-        cityVC.hotCities = ["北京","上海","广州","成都","杭州","重庆"]
-        
+//        cityVC.hotCities = ["北京","上海","广州","成都","杭州","重庆"]
+      
         
         let navVC = UINavigationController(rootViewController: cityVC)
         navVC.navigationBar.barStyle = UIBarStyle.BlackTranslucent

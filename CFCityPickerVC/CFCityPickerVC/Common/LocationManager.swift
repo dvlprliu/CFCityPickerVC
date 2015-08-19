@@ -96,6 +96,8 @@ class LocationManager: NSObject,CLLocationManagerDelegate {
     
     super.init()
     
+    let locationManager = CLLocationManager()
+    
     if !autoUpdate {
       autoUpdate = !CLLocationManager.significantLocationChangeMonitoringAvailable()
     }
