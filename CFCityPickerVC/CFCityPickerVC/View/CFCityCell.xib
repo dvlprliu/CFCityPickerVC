@@ -14,9 +14,11 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <animations/>
+                <color key="backgroundColor" red="0.090196078431372548" green="0.090196078431372548" blue="0.090196078431372548" alpha="1" colorSpace="calibratedRGB"/>
             </tableViewCellContentView>
             <animations/>
-            <point key="canvasLocation" x="491" y="409"/>
+            <color key="backgroundColor" red="0.090196078430000007" green="0.090196078430000007" blue="0.090196078430000007" alpha="1" colorSpace="calibratedRGB"/>
+            <point key="canvasLocation" x="331" y="408"/>
         </tableViewCell>
     </objects>
 </document>

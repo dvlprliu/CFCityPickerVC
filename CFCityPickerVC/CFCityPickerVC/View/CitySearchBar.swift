@@ -35,7 +35,10 @@ class CitySearchBar: UISearchBar,UISearchBarDelegate {
     /** 视图准备 */
     func viewPrepare(){
         self.backgroundColor = UIColor.clearColor()
+      self.searchBarStyle = UISearchBarStyle.Minimal
         self.backgroundImage = UIImage()
+      
+      self.translucent = true
         self.layer.borderColor = CFCityPickerVC.cityPVCTintColor.CGColor
         self.layer.borderWidth = 0.5
         self.layer.cornerRadius = 4
@@ -43,7 +46,6 @@ class CitySearchBar: UISearchBar,UISearchBarDelegate {
         self.setTranslatesAutoresizingMaskIntoConstraints(false)
         self.placeholder = "输出城市名、拼音或者首字母查询"
         self.tintColor = CFCityPickerVC.cityPVCTintColor
-        
         self.delegate = self
     }
 }

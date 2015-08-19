@@ -27,7 +27,7 @@ extension CFCityPickerVC: UITableViewDataSource,UITableViewDelegate{
         var h1: CGFloat = 100
         var h2: CGFloat = 100; if self.historyModels?.count > 4{h2+=40}
         var h3: CGFloat = 100; if self.hotCities?.count > 4 {h3+=40}
-        return h0+h1
+        return h1
     }
     
     private var sortedCityModles: [CityModel] {
@@ -53,7 +53,10 @@ extension CFCityPickerVC: UITableViewDataSource,UITableViewDelegate{
         
         self.tableView = UITableView(frame: CGRectZero, style: UITableViewStyle.Plain)
         self.tableView.setTranslatesAutoresizingMaskIntoConstraints(false)
-        
+        self.tableView.backgroundColor = UIColor(red: CGFloat(0x17)/CGFloat(0xff), green: CGFloat(0x17)/CGFloat(0xff), blue: CGFloat(0x17)/CGFloat(0xff), alpha: CGFloat(1))
+        self.tableView.tintColor = UIColor(red: CGFloat(0x4b)/CGFloat(0xff), green: CGFloat(0x4b)/CGFloat(0xff), blue: CGFloat(0x4b)/CGFloat(0xff), alpha: CGFloat(1))
+      self.tableView.separatorColor = UIColor(red: CGFloat(0x4b)/CGFloat(0xff), green: CGFloat(0x4b)/CGFloat(0xff), blue: CGFloat(0x4b)/CGFloat(0xff), alpha: CGFloat(1))
+      self.tableView.sectionIndexBackgroundColor = UIColor.clearColor()
         
         self.view.addSubview(tableView)
         tableView.dataSource = self
@@ -114,90 +117,90 @@ extension CFCityPickerVC: UITableViewDataSource,UITableViewDelegate{
         let headerView = UIView()
         
         //搜索框
-        searchBar = CitySearchBar()
-        headerView.addSubview(searchBar)
-
-        //vfl
-        let searchBarViewDict = ["searchBar": searchBar]
-        let searchBar_vfl_arr_H = NSLayoutConstraint.constraintsWithVisualFormat("H:|-18-[searchBar]-20-|", options: NSLayoutFormatOptions(0), metrics: nil, views: searchBarViewDict)
-        let searchBar_vfl_arr_V = NSLayoutConstraint.constraintsWithVisualFormat("V:|-10-[searchBar(==36)]|", options: NSLayoutFormatOptions(0), metrics: nil, views: searchBarViewDict)
-        headerView.addConstraints(searchBar_vfl_arr_H)
-        headerView.addConstraints(searchBar_vfl_arr_V)
-        
-        searchBar.searchAction = { (searchText: String) -> Void in
-        
-            println(searchText)
-        
-        }
-        
-        searchBar.searchBarShouldBeginEditing = {[unowned self] in
-        
-            self.navigationController?.setNavigationBarHidden(true, animated: true)
-            
-            self.searchRVC.cityModels = nil
-            
-            UIView.animateWithDuration(0.15, animations: {[unowned self] () -> Void in
-                self.searchRVC.view.alpha = 1
-            })
-        }
-        
-        
-        searchBar.searchBarDidEndditing = {[unowned self] in
-            
-            if self.searchRVC.cityModels != nil {return}
-            
-            self.searchBar.setShowsCancelButton(false, animated: true)
-            self.searchBar.text = ""
-        
-            self.navigationController?.setNavigationBarHidden(false, animated: true)
-            
-            UIView.animateWithDuration(0.14, animations: {[unowned self] () -> Void in
-                self.searchRVC.view.alpha = 0
-            })
-        }
-        
-        searchBar.searchTextDidChangedAction = {[unowned self] (text: String) in
-        
-            if count(text) == 0 {self.searchRVC.cityModels = nil;return}
-            
-            let searchCityModols = CityModel.searchCityModelsWithCondition(text, cities: self.cityModels)
-            
-            self.searchRVC.cityModels = searchCityModols
-        }
-        
-        searchBar.searchBarCancelAction = {[unowned self] in
-        
-            self.searchRVC.cityModels = nil
-            self.searchBar.searchBarDidEndditing?()
-        }
-        
+//        searchBar = CitySearchBar()
+////        headerView.addSubview(searchBar)
+//
+//        //vfl
+//        let searchBarViewDict = ["searchBar": searchBar]
+//        let searchBar_vfl_arr_H = NSLayoutConstraint.constraintsWithVisualFormat("H:|-18-[searchBar]-20-|", options: NSLayoutFormatOptions(0), metrics: nil, views: searchBarViewDict)
+//        let searchBar_vfl_arr_V = NSLayoutConstraint.constraintsWithVisualFormat("V:|-10-[searchBar(==36)]|", options: NSLayoutFormatOptions(0), metrics: nil, views: searchBarViewDict)
+//        headerView.addConstraints(searchBar_vfl_arr_H)
+//        headerView.addConstraints(searchBar_vfl_arr_V)
+//        
+//        searchBar.searchAction = { (searchText: String) -> Void in
+//        
+//            println(searchText)
+//        
+//        }
+//        
+//        searchBar.searchBarShouldBeginEditing = {[unowned self] in
+//        
+//            self.navigationController?.setNavigationBarHidden(true, animated: true)
+//            
+//            self.searchRVC.cityModels = nil
+//            
+//            UIView.animateWithDuration(0.15, animations: {[unowned self] () -> Void in
+//                self.searchRVC.view.alpha = 1
+//            })
+//        }
+//        
+//        
+//        searchBar.searchBarDidEndditing = {[unowned self] in
+//            
+//            if self.searchRVC.cityModels != nil {return}
+//            
+//            self.searchBar.setShowsCancelButton(false, animated: true)
+//            self.searchBar.text = ""
+//        
+//            self.navigationController?.setNavigationBarHidden(false, animated: true)
+//            
+//            UIView.animateWithDuration(0.14, animations: {[unowned self] () -> Void in
+//                self.searchRVC.view.alpha = 0
+//            })
+//        }
+//        
+//        searchBar.searchTextDidChangedAction = {[unowned self] (text: String) in
+//        
+//            if count(text) == 0 {self.searchRVC.cityModels = nil;return}
+//            
+//            let searchCityModols = CityModel.searchCityModelsWithCondition(text, cities: self.cityModels)
+//            
+//            self.searchRVC.cityModels = searchCityModols
+//        }
+//        
+//        searchBar.searchBarCancelAction = {[unowned self] in
+//        
+//            self.searchRVC.cityModels = nil
+//            self.searchBar.searchBarDidEndditing?()
+//        }
+      
         //SeatchResultVC
-        self.searchRVC = CitySearchResultVC(nibName: "CitySearchResultVC", bundle: nil)
-        self.addChildViewController(searchRVC)
-        
-        self.view.addSubview(searchRVC.view)
-        self.view.bringSubviewToFront(searchRVC.view)
-        searchRVC.view.setTranslatesAutoresizingMaskIntoConstraints(false)
-        //vfl
-        let maskViewDict = ["maskView": searchRVC.view]
-        let maskView_vfl_arr_H = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[maskView]-0-|", options: NSLayoutFormatOptions(0), metrics: nil, views: maskViewDict)
-        let maskView_vfl_arr_V = NSLayoutConstraint.constraintsWithVisualFormat("V:|-80-[maskView]-0-|", options: NSLayoutFormatOptions(0), metrics: nil, views: maskViewDict)
-        self.view.addConstraints(maskView_vfl_arr_H)
-        self.view.addConstraints(maskView_vfl_arr_V)
-        searchRVC.view.alpha = 0
-        searchRVC.touchBeganAction = {[unowned self] in
-            searchBar.endEditing(true)
-        }
-        
-        searchRVC.tableViewScrollAction = { [unowned self] in
-            searchBar.endEditing(true)
-        }
-        
-        searchRVC.tableViewDidSelectedRowAction = {[unowned self] (cityModel: CityModel) in
-            
-            self.citySelected(cityModel)
-        }
-        
+//        self.searchRVC = CitySearchResultVC(nibName: "CitySearchResultVC", bundle: nil)
+//        self.addChildViewController(searchRVC)
+//        
+//        self.view.addSubview(searchRVC.view)
+//        self.view.bringSubviewToFront(searchRVC.view)
+//        searchRVC.view.setTranslatesAutoresizingMaskIntoConstraints(false)
+//        //vfl
+//        let maskViewDict = ["maskView": searchRVC.view]
+//        let maskView_vfl_arr_H = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[maskView]-0-|", options: NSLayoutFormatOptions(0), metrics: nil, views: maskViewDict)
+//        let maskView_vfl_arr_V = NSLayoutConstraint.constraintsWithVisualFormat("V:|-80-[maskView]-0-|", options: NSLayoutFormatOptions(0), metrics: nil, views: maskViewDict)
+//        self.view.addConstraints(maskView_vfl_arr_H)
+//        self.view.addConstraints(maskView_vfl_arr_V)
+//        searchRVC.view.alpha = 0
+//        searchRVC.touchBeganAction = {[unowned self] in
+//            searchBar.endEditing(true)
+//        }
+//        
+//        searchRVC.tableViewScrollAction = { [unowned self] in
+//            searchBar.endEditing(true)
+//        }
+//        
+//        searchRVC.tableViewDidSelectedRowAction = {[unowned self] (cityModel: CityModel) in
+//            
+//            self.citySelected(cityModel)
+//        }
+      
         
         headerView.frame = CGRectMake(0, 0, headViewWith, headerViewH)
         
@@ -207,7 +210,7 @@ extension CFCityPickerVC: UITableViewDataSource,UITableViewDelegate{
         if self.currentCityModel != nil {currentCities.append(self.currentCityModel!)}
         itemView.cityModles = currentCities
         var frame1 = headItemViewH(itemView.cityModles.count)
-        frame1.origin.y = searchH
+        frame1.origin.y = 0
         itemView.frame = frame1
         headerView.addSubview(itemView)
         
@@ -355,7 +358,7 @@ extension CFCityPickerVC: UITableViewDataSource,UITableViewDelegate{
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        searchBar.endEditing(true)
+//        searchBar.endEditing(true)
     }
 
     func showIndexTitle(indexTitle: String){

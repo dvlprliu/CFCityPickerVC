@@ -17,25 +17,29 @@ class CFCityCell: UITableViewCell {
 
 
 extension CFCityCell{
+  
+  static var rid: String {return "CFCityCell"}
+  
+  class func cityCellInTableView(tableView: UITableView) -> CFCityCell {
     
-    static var rid: String {return "CFCityCell"}
+    //取出cell
+    var cityCell = tableView.dequeueReusableCellWithIdentifier(rid) as?CFCityCell
     
-    class func cityCellInTableView(tableView: UITableView) -> CFCityCell {
-    
-        //取出cell
-        var cityCell = tableView.dequeueReusableCellWithIdentifier(rid) as?CFCityCell
-        
-        if cityCell == nil {cityCell = CFCityCell(style: UITableViewCellStyle.Default, reuseIdentifier: rid)}
-        
-        return cityCell!
+    if cityCell == nil {
+      cityCell = CFCityCell(style: UITableViewCellStyle.Default, reuseIdentifier: rid)
+      cityCell?.backgroundColor = UIColor(red: CGFloat(0x17)/CGFloat(0xff), green: CGFloat(0x17)/CGFloat(0xff), blue: CGFloat(0x17)/CGFloat(0xff), alpha: CGFloat(1))
+      cityCell?.textLabel?.textColor = UIColor.whiteColor()
     }
     
+    return cityCell!
+  }
+  
+  
+  /** 数据填充 */
+  func dataFill(){
     
-    /** 数据填充 */
-    func dataFill(){
-        
-        self.textLabel?.text = "\(cityModel.name)"
-        
-    }
+    self.textLabel?.text = "\(cityModel.name)"
     
+  }
+  
 }

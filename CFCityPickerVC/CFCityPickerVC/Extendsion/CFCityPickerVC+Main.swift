@@ -26,6 +26,7 @@ extension CFCityPickerVC {
         labelPrepare()
         
         self.tableView.sectionIndexColor = CFCityPickerVC.cityPVCTintColor
+      view.backgroundColor = UIColor(red: CGFloat(0x17)/CGFloat(0xff), green: CGFloat(0x17)/CGFloat(0xff), blue: CGFloat(0x17)/CGFloat(0xff), alpha: CGFloat(1))
         
         /** headerView */
         headerviewPrepare()
